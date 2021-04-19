@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useQuery, gql } from "@apollo/client";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Routes from "./routes";
+
+const launchesPast = gql`
+  query GetExchangeRates {
+    launchesPast(limit: 10) {
+      mission_name
+      launch_date_local
+      launch_site {
+        site_name_long
+      }
+    }
+  }
+`;
+
+const App = () => {
+  const { loading, error, data } = useQuery(launchesPast);
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
+
+  console.log(data);
+  return <Routes />;
+};
 
 export default App;
