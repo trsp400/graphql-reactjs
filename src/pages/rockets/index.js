@@ -73,7 +73,11 @@ const Rockets = () => {
               <Input
                 value={listLimit}
                 onChange={(event) => setListLimit(event?.target?.value)}
-                placeholder={listLimit}
+                placeholder={
+                  listLimit <= data?.rockets?.length
+                    ? data?.rockets?.length
+                    : listLimit
+                }
                 type="text"
                 maxLength={3}
                 w="20"

@@ -71,7 +71,11 @@ const Launches = () => {
               <Input
                 value={listLimit}
                 onChange={(event) => setListLimit(event?.target?.value)}
-                placeholder={data?.launchesPast?.length}
+                placeholder={
+                  listLimit <= data?.launchesPast?.length
+                    ? data?.launchesPast?.length
+                    : listLimit
+                }
                 type="text"
                 maxLength={3}
                 w="20"
