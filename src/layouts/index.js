@@ -1,4 +1,4 @@
-import { Container } from "../styles";
+import { Container, MainContainer } from "../styles";
 
 import GlobalStyles from "../styles/globals";
 
@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
     <Container>
       <GlobalStyles />
       <Sidebar />
-      {children}
+      <MainContainer>{children}</MainContainer>
     </Container>
   );
 };
