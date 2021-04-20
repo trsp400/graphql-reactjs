@@ -17,10 +17,6 @@ const launchesPast = gql`
 const App = () => {
   const { loading, error, data } = useQuery(launchesPast);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
-
-  console.log(data);
   return <Routes />;
 };
 
