@@ -5,37 +5,43 @@ import {
   AccordionPanel,
   AccordionIcon,
   Flex,
-  Spacer,
   Box,
-  Center,
   Text,
+  Heading,
 } from "@chakra-ui/react";
 
-const Card = () => {
-  return (
-    <Flex color="#000" flexDirection="column" maxWidth="5xl">
-      <Center w="100px" bg="green.500">
-        <Text>Box 1</Text>
-      </Center>
-      <Accordion defaultIndex={[0]} allowMultiple>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </Flex>
+const Card = ({ launchData }) => {
+  return launchData > 0 ? (
+    launchData.map((launch) => (
+      <Flex color="#000" flexDirection="column" border="1px solid #a528cc">
+        <Text padding="3">Nome</Text>
+        <Accordion
+          allowMultiple
+          outlineColor="#a528cc"
+          ringColor="#a528cc !important"
+          boxShadow="none !important"
+        >
+          <AccordionItem>
+            <h2>
+              <AccordionButton
+                boxShadow="none !important"
+                borderTop="1px solid #a528cc"
+              >
+                <Box textAlign="left">Detalhes</Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <Text>Foguete: ssass</Text>
+              <Text>Data de lançamento: 20/04/2020</Text>
+              <Text>Local: alalalalla</Text>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Flex>
+    ))
+  ) : (
+    <Heading fontSize="x-large">Sem informações...</Heading>
   );
 };
 
