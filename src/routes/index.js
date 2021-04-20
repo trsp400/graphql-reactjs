@@ -11,13 +11,11 @@ const Routes = ({ children }) => {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route path="/launches">
+          <Route path="/launches" exact>
             <Launches />
           </Route>
-          {/* <Route path="/">
-            <Home />
-          </Route> */}
-          <Route path="/rockets">
+
+          <Route path="/rockets" exact>
             <Rockets />
           </Route>
         </Switch>
