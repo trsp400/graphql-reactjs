@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import {
@@ -18,9 +19,11 @@ import LaunchesCard from "../../components/LaunchCard";
 import Spinner from "../../components/Spinner";
 
 const Launches = () => {
+  const [listLimit, setListLimit] = useState(10);
+
   const launchesPast = gql`
     query getLaunches {
-      launchesPast(limit: 10, order: "launch_date_utc") {
+      launchesPast(limit: ${listLimit || 10}, order: "launch_date_utc") {
         mission_name
         launch_date_local
         launch_site {
@@ -60,11 +63,19 @@ const Launches = () => {
     <Flex flexDirection="column" flex="1" w="100%" overflow="auto">
       <Flex padding="10" flexDirection="row" justifyContent="space-between">
         <Heading fontSize="3xl">Lançamentos</Heading>
-        <Flex justifyContent="space-around" w="50%">
+        <Flex justifyContent="space-around" w="60%">
           <Center>
             <Input type="text" placeholder="Pesquisar" w="64" />
             <Heading paddingLeft="10" fontSize="medium">
-              Apresentando: 10
+              Apresentando:
+              <Input
+                value={listLimit}
+                onChange={(event) => setListLimit(event?.target?.value)}
+                placeholder={data?.launchesPast?.length}
+                type="text"
+                maxLength={3}
+                w="20"
+              />
             </Heading>
           </Center>
         </Flex>

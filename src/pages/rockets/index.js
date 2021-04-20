@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import {
@@ -18,9 +19,10 @@ import RocketCard from "../../components/RocketCard";
 import Spinner from "../../components/Spinner";
 
 const Rockets = () => {
+  const [listLimit, setListLimit] = useState(10);
   const rockets = gql`
     query GetRockets {
-      rockets(limit: 10) {
+      rockets(limit: ${listLimit || 10}) {
         name
         stages
         active
@@ -44,8 +46,6 @@ const Rockets = () => {
 
   const { loading, error, data } = useQuery(rockets);
 
-  console.log(data);
-
   if (loading) return <Spinner />;
 
   if (error) {
@@ -65,11 +65,19 @@ const Rockets = () => {
     <Flex flexDirection="column" flex="1" w="100%" overflow="auto">
       <Flex padding="10" flexDirection="row" justifyContent="space-between">
         <Heading fontSize="3xl">Foguetes</Heading>
-        <Flex justifyContent="space-around" w="50%">
+        <Flex justifyContent="space-around" w="60%">
           <Center>
             <Input type="text" placeholder="Pesquisar" w="64" />
             <Heading paddingLeft="10" fontSize="medium">
-              Apresentando: 10
+              Apresentando:{" "}
+              <Input
+                value={listLimit}
+                onChange={(event) => setListLimit(event?.target?.value)}
+                placeholder={listLimit}
+                type="text"
+                maxLength={3}
+                w="20"
+              />
             </Heading>
           </Center>
         </Flex>
