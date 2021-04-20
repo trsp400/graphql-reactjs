@@ -8,9 +8,11 @@ import {
   Box,
   Text,
   Heading,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react";
 
-const Card = ({ launchData }) => {
+const LaunchCard = ({ launchData }) => {
   console.log(launchData);
   return launchData?.length > 0 ? (
     launchData.map((launch) => {
@@ -19,6 +21,8 @@ const Card = ({ launchData }) => {
         launch_date_local,
         launch_site: { site_name_long },
         rocket: { rocket_name },
+        details,
+        ships,
       } = launch;
 
       const launchDate = new Date(launch_date_local);
@@ -51,9 +55,38 @@ const Card = ({ launchData }) => {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Text>Foguete: {rocket_name}</Text>
-                <Text>Data de lançamento: {formattedLaunchDate}</Text>
-                <Text>Local: {site_name_long}</Text>
+                <Text>
+                  <b>Foguete: </b>
+                  {rocket_name}
+                </Text>
+                <Text>
+                  <b>Data de lançamento:</b> {formattedLaunchDate}
+                </Text>
+                <Text>
+                  <b>Local: </b>
+                  {site_name_long}
+                </Text>
+                <Text>
+                  <b>Descrição: </b> {details || "Sem descrição..."}
+                </Text>
+                {ships?.length > 0 ? (
+                  <>
+                    <Text fontWeight="600">Lista de naves: </Text>
+                    {ships?.map((ship) => (
+                      <Box>
+                        <hr style={{ height: "4px" }} />
+                        <UnorderedList key={ship?.name}>
+                          <ListItem>Nome: {ship?.name}</ListItem>
+                          <ListItem>Tipo: {ship?.type}</ListItem>
+                        </UnorderedList>
+                      </Box>
+                    ))}
+                  </>
+                ) : (
+                  <Text>
+                    <b>Lista de naves: </b>Lista vazia
+                  </Text>
+                )}
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -65,4 +98,4 @@ const Card = ({ launchData }) => {
   );
 };
 
-export default Card;
+export default LaunchCard;

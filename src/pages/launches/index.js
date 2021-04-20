@@ -7,7 +7,6 @@ import {
   Input,
   Flex,
   Center,
-  Progress,
   Alert,
   AlertIcon,
   AlertTitle,
@@ -16,11 +15,12 @@ import {
 } from "@chakra-ui/react";
 
 import LaunchesCard from "../../components/LaunchCard";
+import Spinner from "../../components/Spinner";
 
 const Launches = () => {
   const launchesPast = gql`
-    query GetExchangeRates {
-      launchesPast(limit: 10) {
+    query getLaunches {
+      launchesPast(limit: 10, order: "launch_date_utc") {
         mission_name
         launch_date_local
         launch_site {
@@ -29,13 +29,20 @@ const Launches = () => {
         rocket {
           rocket_name
         }
+        launch_date_utc
+        details
+        ships {
+          name
+          type
+        }
       }
     }
   `;
 
   const { loading, error, data } = useQuery(launchesPast);
 
-  if (loading) return <Progress size="xs" isIndeterminate />;
+  if (loading) return <Spinner />;
+
   if (error) {
     return (
       <Alert status="error">
