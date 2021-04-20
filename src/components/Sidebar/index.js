@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -23,10 +23,10 @@ const Sidebar = () => {
         <Link to="/">Softplan Challenge</Link>
       </GridItem>
       <GridItem colSpan={8} padding="5">
-        <Link to="/launches">Foguetes</Link>
+        <Link to="/rockets">Foguetes</Link>
       </GridItem>
       <GridItem colSpan={8} padding="5">
-        <Link to="/rockets">Lançamentos</Link>
+        <Link to="/launches">Lançamentos</Link>
       </GridItem>
       <GridItem
         colSpan={8}
