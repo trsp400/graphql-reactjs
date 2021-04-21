@@ -1,7 +1,7 @@
-import React from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import React from 'react';
+import { Grid, GridItem } from '@chakra-ui/react';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -20,7 +20,7 @@ const Sidebar = () => {
         borderBottomStyle="solid"
         borderBottomColor="#000"
       >
-        <Link to="/">Softplan Challenge</Link>
+        <Link to="/">SpaceX API GraphQL</Link>
       </GridItem>
       <GridItem colSpan={8} padding="5">
         <Link to="/rockets">Foguetes</Link>
@@ -37,7 +37,7 @@ const Sidebar = () => {
         borderTopStyle="solid"
         borderTopColor="#000"
       >
-        <Link>Novos Lançamentos</Link>
+        <Link to="/new_launches">Novos Lançamentos</Link>
       </GridItem>
     </Grid>
   );

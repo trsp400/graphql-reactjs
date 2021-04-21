@@ -1,8 +1,8 @@
-import { Container, MainContainer } from "../styles";
+import { Container, MainContainer } from '../styles';
 
-import GlobalStyles from "../styles/globals";
+import GlobalStyles from '../styles/globals';
 
-import Sidebar from "../components/Sidebar";
+import Sidebar from '../components/Sidebar';
 
 const Layout = ({ children }) => {
   return (

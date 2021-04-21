@@ -1,4 +1,4 @@
-import { Flex, Center, Spinner as ChakraSpinner } from "@chakra-ui/react";
+import { Flex, Center, Spinner as ChakraSpinner } from '@chakra-ui/react';
 
 const Spinner = () => (
   <Flex

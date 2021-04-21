@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
 
 import {
   Grid,
@@ -13,10 +13,11 @@ import {
   AlertTitle,
   AlertDescription,
   CloseButton,
-} from "@chakra-ui/react";
+  Select,
+} from '@chakra-ui/react';
 
-import RocketCard from "../../components/RocketCard";
-import Spinner from "../../components/Spinner";
+import RocketCard from '../../components/RocketCard';
+import Spinner from '../../components/Spinner';
 
 const Rockets = () => {
   const [listLimit, setListLimit] = useState(10);
@@ -68,21 +69,20 @@ const Rockets = () => {
         <Flex justifyContent="space-around" w="60%">
           <Center>
             <Input type="text" placeholder="Pesquisar" w="64" />
-            <Heading paddingLeft="10" fontSize="medium">
-              Apresentando:{" "}
-              <Input
-                value={listLimit}
-                onChange={(event) => setListLimit(event?.target?.value)}
-                placeholder={
-                  listLimit <= data?.rockets?.length
-                    ? data?.rockets?.length
-                    : listLimit
-                }
-                type="text"
-                maxLength={3}
-                w="20"
-              />
+            <Heading paddingLeft="10" paddingRight="5" fontSize="medium">
+              Apresentando:
             </Heading>
+            <Select
+              value={listLimit}
+              onChange={event => setListLimit(event?.target?.value)}
+              type="text"
+              maxLength={3}
+              w="20"
+            >
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </Select>
           </Center>
         </Flex>
       </Flex>
