@@ -10,12 +10,11 @@ import {
   Heading,
   ListItem,
   UnorderedList,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const RocketCard = ({ rocketData }) => {
-  console.log(rocketData);
   return rocketData?.length > 0 ? (
-    rocketData.map((launch) => {
+    rocketData.map(launch => {
       const {
         name,
         stages,
@@ -57,7 +56,7 @@ const RocketCard = ({ rocketData }) => {
               <AccordionPanel>
                 <Text>
                   <b>Status: </b>
-                  {active ? "Ativo" : "Desativado"}
+                  {active ? 'Ativo' : 'Desativado'}
                 </Text>
 
                 <Text>
@@ -65,7 +64,7 @@ const RocketCard = ({ rocketData }) => {
                   {stages}
                 </Text>
                 <Text>
-                  <b>Descrição: </b> {description || "Sem descrição..."}
+                  <b>Descrição: </b> {description || 'Sem descrição...'}
                 </Text>
                 <Text>
                   <b>Diâmetro: </b> {diameterMeters}M
@@ -79,8 +78,8 @@ const RocketCard = ({ rocketData }) => {
                       <b>Capacidade de carga: </b>
                     </Text>
 
-                    {payloadWeight?.map((payload) => (
-                      <UnorderedList>
+                    {payloadWeight?.map(payload => (
+                      <UnorderedList key={payload?.kg}>
                         <ListItem>Peso: {payload?.kg}KG</ListItem>
                       </UnorderedList>
                     ))}

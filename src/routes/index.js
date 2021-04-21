@@ -1,11 +1,12 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Launches from "../pages/launches";
-import Rockets from "../pages/rockets";
+import Launches from '../pages/launches';
+import Rockets from '../pages/rockets';
+import NewLaunches from '../pages/new_launches';
 
-import Layout from "../layouts";
+import Layout from '../layouts';
 
-const Routes = ({ children }) => {
+const Routes = () => {
   return (
     <BrowserRouter>
       <Layout>
@@ -15,6 +16,9 @@ const Routes = ({ children }) => {
           </Route>
           <Route path="/rockets" exact>
             <Rockets />
+          </Route>
+          <Route path="/new_launches" exact>
+            <NewLaunches />
           </Route>
         </Switch>
       </Layout>

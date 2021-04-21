@@ -8,35 +8,45 @@ import {
   Box,
   Text,
   Heading,
-  ListItem,
-  UnorderedList,
+  IconButton,
 } from '@chakra-ui/react';
 
-const LaunchCard = ({ launchData }) => {
+import { DeleteIcon } from '@chakra-ui/icons';
+
+const NewLaunchCard = ({ launchData, onDelete }) => {
   return launchData?.length > 0 ? (
     launchData.map(launch => {
       const {
-        mission_name,
-        launch_date_local,
-        launch_site: { site_name_long },
-        rocket: { rocket_name },
-        details,
-        ships,
+        id,
+        launchName,
+        launchDate,
+        launchSite,
+        launchRocket,
+        launchDescription,
       } = launch;
 
-      const launchDate = new Date(launch_date_local);
-      const formattedLaunchDate = `${launchDate.getDay()}/${launchDate.getMonth()}/${launchDate.getFullYear()}`;
+      const newLaunchDate = new Date(launchDate);
+      const formattedLaunchDate = `${newLaunchDate.getDay()}/${newLaunchDate.getMonth()}/${newLaunchDate.getFullYear()}`;
       return (
         <Flex
           color="#000"
           flexDirection="column"
           border="1px solid #a528cc"
-          key={mission_name}
+          key={id}
           margin="5"
         >
-          <Text padding="3" fontWeight="600">
-            Nome: {mission_name}
-          </Text>
+          <Flex color="#000" flexDirection="row" justifyContent="space-between">
+            <Text padding="3" fontWeight="600">
+              Nome: {launchName}
+            </Text>
+            <IconButton
+              margin="2"
+              colorScheme="red"
+              aria-label="Delete Launch"
+              icon={<DeleteIcon />}
+              onClick={() => onDelete(id)}
+            />
+          </Flex>
           <Accordion
             allowMultiple
             outlineColor="#a528cc"
@@ -56,36 +66,18 @@ const LaunchCard = ({ launchData }) => {
               <AccordionPanel>
                 <Text>
                   <b>Foguete: </b>
-                  {rocket_name}
+                  {launchRocket}
                 </Text>
                 <Text>
                   <b>Data de lançamento:</b> {formattedLaunchDate}
                 </Text>
                 <Text>
                   <b>Local: </b>
-                  {site_name_long}
+                  {launchSite}
                 </Text>
                 <Text>
-                  <b>Descrição: </b> {details || 'Sem descrição...'}
+                  <b>Descrição: </b> {launchDescription || 'Sem descrição...'}
                 </Text>
-                {ships?.length > 0 ? (
-                  <>
-                    <Text fontWeight="600">Lista de naves: </Text>
-                    {ships?.map(ship => (
-                      <Box key={ship?.name}>
-                        <hr style={{ height: '4px' }} />
-                        <UnorderedList key={ship?.name}>
-                          <ListItem>Nome: {ship?.name}</ListItem>
-                          <ListItem>Tipo: {ship?.type}</ListItem>
-                        </UnorderedList>
-                      </Box>
-                    ))}
-                  </>
-                ) : (
-                  <Text>
-                    <b>Lista de naves: </b>Lista vazia
-                  </Text>
-                )}
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -97,4 +89,4 @@ const LaunchCard = ({ launchData }) => {
   );
 };
 
-export default LaunchCard;
+export default NewLaunchCard;
