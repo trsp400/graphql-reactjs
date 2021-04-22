@@ -171,13 +171,6 @@ const NewLaunches = () => {
       launchDescription: '',
     });
 
-    // const launches = JSON.parse(localStorage.getItem('@grapql-react-app/new_launches'));
-
-    // if (launches?.length === 1) {
-    //   setNewLaunches([]);
-    //   return localStorage.setItem('@grapql-react-app/new_launches', JSON.stringify([]));
-    // }
-
     return localStorage.setItem(
       '@grapql-react-app/new_launches',
       JSON.stringify(newLaunches),
@@ -202,7 +195,11 @@ const NewLaunches = () => {
 
   const onDelete = useCallback(
     id => {
-      setNewLaunches(() => [newLaunches.find(launch => launch.id !== id)]);
+      localStorage.setItem(
+        '@grapql-react-app/new_launches',
+        JSON.stringify(newLaunches.filter(launch => launch.id !== id)),
+      );
+      setNewLaunches(() => newLaunches.filter(launch => launch.id !== id));
       setIsModalVisible(false);
     },
     [newLaunches, setNewLaunches],
@@ -286,11 +283,15 @@ const NewLaunches = () => {
       <Flex>
         <Grid padding="10" w="80%">
           <GridItem>
-            <NewLaunchesCard
-              search={search}
-              launchData={newLaunches}
-              onDelete={onDelete}
-            />
+            {newLaunches.length > 0 ? (
+              <NewLaunchesCard
+                search={search}
+                launchData={newLaunches}
+                onDelete={onDelete}
+              />
+            ) : (
+              <Heading fontSize="x-large">Sem informações...</Heading>
+            )}
           </GridItem>
         </Grid>
       </Flex>

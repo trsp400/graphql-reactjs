@@ -22,8 +22,6 @@ const Layout = ({ children }) => {
         localStorage.getdata('@grapql-react-app/new_launches'),
       );
 
-      console.log(data);
-
       if (data) {
         return setNewLaunchesCount(data?.length);
       }
@@ -37,8 +35,6 @@ const Layout = ({ children }) => {
       window.removeEventListener('storage', checkNewLaunchesData);
     };
   }, []);
-
-  console.log('==============================');
 
   return (
     <Container>
