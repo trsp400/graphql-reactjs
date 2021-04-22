@@ -20,8 +20,6 @@ const LaunchCard = ({ launchData, search }) => {
         )
       : launchData;
 
-  console.log(launchDataInSearch);
-
   return launchDataInSearch?.length > 0 ? (
     launchDataInSearch.map(launch => {
       const {

@@ -20,7 +20,6 @@ const NewLaunchCard = ({ launchData, onDelete, search }) => {
         )
       : launchData;
 
-  console.log(launchDataInSearch);
   return launchDataInSearch.map(launch => {
     const {
       id,

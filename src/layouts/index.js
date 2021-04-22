@@ -5,7 +5,8 @@ import GlobalStyles from '../styles/globals';
 
 import Sidebar from '../components/Sidebar';
 
-const Layout = ({ children }) => {
+const Layout = props => {
+  const { children } = props;
   const [newLaunchesCount, setNewLaunchesCount] = useState(() => {
     const storedLaunches = JSON.parse(
       localStorage.getItem('@grapql-react-app/new_launches'),
@@ -19,7 +20,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     function checkNewLaunchesData() {
       const data = JSON.parse(
-        localStorage.getdata('@grapql-react-app/new_launches'),
+        localStorage.getItem('@grapql-react-app/new_launches'),
       );
 
       if (data) {
@@ -29,10 +30,10 @@ const Layout = ({ children }) => {
       return 0;
     }
 
-    window.addEventListener('storage', checkNewLaunchesData);
+    window.addEventListener('mousemove', checkNewLaunchesData);
 
     return () => {
-      window.removeEventListener('storage', checkNewLaunchesData);
+      window.removeEventListener('mousemove', checkNewLaunchesData);
     };
   }, []);
 
