@@ -12,9 +12,16 @@ import {
   UnorderedList,
 } from '@chakra-ui/react';
 
-const RocketCard = ({ rocketData }) => {
-  return rocketData?.length > 0 ? (
-    rocketData.map(launch => {
+const RocketCard = ({ rocketData, search }) => {
+  const rocketDataInSearch =
+    search?.length > 0
+      ? rocketData.filter(launch =>
+          launch?.name?.toLowerCase().includes(search.toLowerCase()),
+        )
+      : rocketData;
+
+  return rocketDataInSearch?.length > 0 ? (
+    rocketDataInSearch.map(launch => {
       const {
         name,
         stages,

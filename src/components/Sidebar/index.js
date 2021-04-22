@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem, Flex, Box } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ newLaunchesCount }) => {
   return (
     <Grid
       h="100%"
@@ -37,7 +37,19 @@ const Sidebar = () => {
         borderTopStyle="solid"
         borderTopColor="#000"
       >
-        <Link to="/new_launches">Novos Lançamentos</Link>
+        <Flex flexDirection="row" flex="1" justifyContent="space-between">
+          <Link to="/new_launches">Novos Lançamentos</Link>
+          <Box
+            border="2px solid #ddd"
+            borderRadius="40%"
+            color="#ddd"
+            height="100%"
+            width="10%"
+            textAlign="center"
+          >
+            {newLaunchesCount}
+          </Box>
+        </Flex>
       </GridItem>
     </Grid>
   );

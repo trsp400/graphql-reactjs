@@ -21,6 +21,7 @@ import Spinner from '../../components/Spinner';
 
 const Rockets = () => {
   const [listLimit, setListLimit] = useState(10);
+  const [search, setSearch] = useState('');
   const rockets = gql`
     query GetRockets {
       rockets(limit: ${listLimit || 10}) {
@@ -68,7 +69,12 @@ const Rockets = () => {
         <Heading fontSize="3xl">Foguetes</Heading>
         <Flex justifyContent="space-around" w="60%">
           <Center>
-            <Input type="text" placeholder="Pesquisar" w="64" />
+            <Input
+              type="text"
+              placeholder="Pesquisar"
+              w="64"
+              onChange={event => setSearch(event?.target?.value)}
+            />
             <Heading paddingLeft="10" paddingRight="5" fontSize="medium">
               Apresentando:
             </Heading>
@@ -89,7 +95,7 @@ const Rockets = () => {
       <Flex>
         <Grid padding="10" w="80%">
           <GridItem>
-            <RocketCard rocketData={data?.rockets} />
+            <RocketCard rocketData={data?.rockets} search={search} />
           </GridItem>
         </Grid>
       </Flex>

@@ -21,6 +21,7 @@ import Spinner from '../../components/Spinner';
 
 const Launches = () => {
   const [listLimit, setListLimit] = useState(10);
+  const [search, setSearch] = useState('');
 
   const launchesPast = gql`
     query getLaunches {
@@ -66,7 +67,12 @@ const Launches = () => {
         <Heading fontSize="3xl">Lançamentos</Heading>
         <Flex justifyContent="space-around" w="60%">
           <Center>
-            <Input type="text" placeholder="Pesquisar" w="64" />
+            <Input
+              type="text"
+              placeholder="Pesquisar"
+              w="64"
+              onChange={event => setSearch(event?.target?.value)}
+            />
             <Heading paddingLeft="10" paddingRight="5" fontSize="medium">
               Apresentando:
             </Heading>
@@ -87,7 +93,7 @@ const Launches = () => {
       <Flex>
         <Grid padding="10" w="80%">
           <GridItem>
-            <LaunchesCard launchData={data?.launchesPast} />
+            <LaunchesCard search={search} launchData={data?.launchesPast} />
           </GridItem>
         </Grid>
       </Flex>

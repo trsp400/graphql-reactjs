@@ -139,6 +139,7 @@ const Modal = ({
 
 const NewLaunches = () => {
   const [listLimit, setListLimit] = useState(10);
+  const [search, setSearch] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [launchStates, setLaunchStates] = useState({
@@ -152,7 +153,7 @@ const NewLaunches = () => {
 
   const [newLaunches, setNewLaunches] = useState(() => {
     const storedLaunches = JSON.parse(
-      localStorage.getItem('@softplan/new_launches'),
+      localStorage.getItem('@grapql-react-app/new_launches'),
     );
 
     if (storedLaunches) return storedLaunches;
@@ -170,15 +171,15 @@ const NewLaunches = () => {
       launchDescription: '',
     });
 
-    // const launches = JSON.parse(localStorage.getItem('@softplan/new_launches'));
+    // const launches = JSON.parse(localStorage.getItem('@grapql-react-app/new_launches'));
 
     // if (launches?.length === 1) {
     //   setNewLaunches([]);
-    //   return localStorage.setItem('@softplan/new_launches', JSON.stringify([]));
+    //   return localStorage.setItem('@grapql-react-app/new_launches', JSON.stringify([]));
     // }
 
     return localStorage.setItem(
-      '@softplan/new_launches',
+      '@grapql-react-app/new_launches',
       JSON.stringify(newLaunches),
     );
   }, [newLaunches]);
@@ -237,8 +238,6 @@ const NewLaunches = () => {
 
   const { rockets, launchpads } = data;
 
-  console.log(newLaunches);
-
   return (
     <Flex flexDirection="column" flex="1" w="100%" overflow="auto">
       <Modal
@@ -261,7 +260,12 @@ const NewLaunches = () => {
         </Button>
         <Flex justifyContent="space-around" w="50%">
           <Center>
-            <Input type="text" placeholder="Pesquisar" w="64" />
+            <Input
+              type="text"
+              placeholder="Pesquisar"
+              w="64"
+              onChange={event => setSearch(event?.target?.value)}
+            />
             <Heading paddingLeft="10" paddingRight="5" fontSize="medium">
               Apresentando:
             </Heading>
@@ -282,7 +286,11 @@ const NewLaunches = () => {
       <Flex>
         <Grid padding="10" w="80%">
           <GridItem>
-            <NewLaunchesCard launchData={newLaunches} onDelete={onDelete} />
+            <NewLaunchesCard
+              search={search}
+              launchData={newLaunches}
+              onDelete={onDelete}
+            />
           </GridItem>
         </Grid>
       </Flex>

@@ -13,9 +13,16 @@ import {
 
 import { DeleteIcon } from '@chakra-ui/icons';
 
-const NewLaunchCard = ({ launchData, onDelete }) => {
-  return launchData?.length > 0 ? (
-    launchData.map(launch => {
+const NewLaunchCard = ({ launchData, onDelete, search }) => {
+  const launchDataInSearch =
+    search?.length > 0
+      ? launchData.filter(launch =>
+          launch.launchName?.toLowerCase().includes(search.toLowerCase()),
+        )
+      : launchData;
+
+  return launchDataInSearch?.length > 0 ? (
+    launchDataInSearch.map(launch => {
       const {
         id,
         launchName,

@@ -12,9 +12,16 @@ import {
   UnorderedList,
 } from '@chakra-ui/react';
 
-const LaunchCard = ({ launchData }) => {
-  return launchData?.length > 0 ? (
-    launchData.map(launch => {
+const LaunchCard = ({ launchData, search }) => {
+  const launchDataInSearch =
+    search?.length > 0
+      ? launchData.filter(launch =>
+          launch?.mission_name?.toLowerCase().includes(search.toLowerCase()),
+        )
+      : launchData;
+
+  return launchDataInSearch?.length > 0 ? (
+    launchDataInSearch.map(launch => {
       const {
         mission_name,
         launch_date_local,
