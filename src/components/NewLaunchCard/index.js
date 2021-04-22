@@ -16,22 +16,23 @@ const NewLaunchCard = ({ launchData, onDelete, search }) => {
   const launchDataInSearch =
     search?.length > 0
       ? launchData.filter(launch =>
-          launch.launchName?.toLowerCase().includes(search.toLowerCase()),
+          launch.mission_name?.toLowerCase().includes(search.toLowerCase()),
         )
       : launchData;
 
+  console.log(launchDataInSearch);
   return launchDataInSearch.map(launch => {
     const {
       id,
-      launchName,
-      launchDate,
-      launchSite,
-      launchRocket,
-      launchDescription,
+      mission_name,
+      launch_date_local,
+      launch_site: { site_name_long },
+      rocket: { rocket_name },
+      details,
     } = launch;
 
-    const newLaunchDate = new Date(launchDate);
-    const formattedLaunchDate = `${newLaunchDate.getDay()}/${newLaunchDate.getMonth()}/${newLaunchDate.getFullYear()}`;
+    const newlaunch_date_local = new Date(launch_date_local);
+    const formattedlaunch_date_local = `${newlaunch_date_local.getDay()}/${newlaunch_date_local.getMonth()}/${newlaunch_date_local.getFullYear()}`;
     return (
       <Flex
         color="#000"
@@ -42,7 +43,7 @@ const NewLaunchCard = ({ launchData, onDelete, search }) => {
       >
         <Flex color="#000" flexDirection="row" justifyContent="space-between">
           <Text padding="3" fontWeight="600">
-            Nome: {launchName}
+            Nome: {mission_name}
           </Text>
           <IconButton
             margin="2"
@@ -71,17 +72,17 @@ const NewLaunchCard = ({ launchData, onDelete, search }) => {
             <AccordionPanel>
               <Text>
                 <b>Foguete: </b>
-                {launchRocket}
+                {rocket_name}
               </Text>
               <Text>
-                <b>Data de lançamento:</b> {formattedLaunchDate}
+                <b>Data de lançamento:</b> {formattedlaunch_date_local}
               </Text>
               <Text>
                 <b>Local: </b>
-                {launchSite}
+                {site_name_long}
               </Text>
               <Text>
-                <b>Descrição: </b> {launchDescription || 'Sem descrição...'}
+                <b>Descrição: </b> {details || 'Sem descrição...'}
               </Text>
             </AccordionPanel>
           </AccordionItem>

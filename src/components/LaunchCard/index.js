@@ -20,6 +20,8 @@ const LaunchCard = ({ launchData, search }) => {
         )
       : launchData;
 
+  console.log(launchDataInSearch);
+
   return launchDataInSearch?.length > 0 ? (
     launchDataInSearch.map(launch => {
       const {
@@ -31,14 +33,23 @@ const LaunchCard = ({ launchData, search }) => {
         ships,
       } = launch;
 
+      const id = launch?.id || null;
+
       const launchDate = new Date(launch_date_local);
       const formattedLaunchDate = `${launchDate.getDay()}/${launchDate.getMonth()}/${launchDate.getFullYear()}`;
       return (
         <Flex
           color="#000"
           flexDirection="column"
-          border="1px solid #a528cc"
+          border={id ? '4px solid #a528cc' : '1px solid #a528cc'}
           key={mission_name}
+          _hover={
+            id && {
+              transform: ['scale(1.05)'],
+              transition: 'all 0.3s',
+              borderColor: '#370fd8',
+            }
+          }
           margin="5"
         >
           <Text padding="3" fontWeight="600">

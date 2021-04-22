@@ -23,6 +23,16 @@ const Launches = () => {
   const [listLimit, setListLimit] = useState(10);
   const [search, setSearch] = useState('');
 
+  const [newLaunches] = useState(() => {
+    const storedLaunches = JSON.parse(
+      localStorage.getItem('@grapql-react-app/new_launches'),
+    );
+
+    if (storedLaunches) return storedLaunches;
+
+    return [];
+  });
+
   const launchesPast = gql`
     query getLaunches {
       launchesPast(limit: ${listLimit || 10}, order: "launch_date_utc") {
@@ -61,6 +71,8 @@ const Launches = () => {
     );
   }
 
+  const launches = [...data?.launchesPast, ...newLaunches];
+
   return (
     <Flex flexDirection="column" flex="1" w="100%" overflow="auto">
       <Flex padding="10" flexDirection="row" justifyContent="space-between">
@@ -93,7 +105,7 @@ const Launches = () => {
       <Flex>
         <Grid padding="10" w="80%">
           <GridItem>
-            <LaunchesCard search={search} launchData={data?.launchesPast} />
+            <LaunchesCard search={search} launchData={launches} />
           </GridItem>
         </Grid>
       </Flex>

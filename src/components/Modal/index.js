@@ -29,7 +29,7 @@ const Modal = ({
   const { launchpads, rockets } = launchData;
 
   useEffect(() => {
-    setStates('launchDate', date);
+    setStates(date, 'launch_date_local');
   }, [date]);
 
   return (
@@ -49,19 +49,26 @@ const Modal = ({
             <Input
               placeholder="Nome"
               value={states?.launchName}
-              onChange={event => setStates('launchName', event?.target?.value)}
+              onChange={event =>
+                setStates(event?.target?.value, 'mission_name')
+              }
             />
           </FormControl>
           <FormControl isRequired paddingBottom="2">
             <FormLabel>Data</FormLabel>
-            <DateTimePicker onChange={setDate} value={states?.launchDate} />
+            <DateTimePicker
+              onChange={setDate}
+              value={states?.launch_date_local}
+            />
           </FormControl>
           <FormControl paddingBottom="2">
             <FormLabel>Local de lançamento</FormLabel>
             <Select
               value={states?.launchSite}
               placeholder="Selecione uma opção"
-              onChange={event => setStates('launchSite', event?.target?.value)}
+              onChange={event =>
+                setStates(event?.target?.value, 'launch_site', 'site_name_long')
+              }
             >
               {launchpads?.length > 0 ? (
                 launchpads?.map(site => (
@@ -82,7 +89,7 @@ const Modal = ({
               placeholder="Selecione uma opção"
               value={states?.launchRocket}
               onChange={event =>
-                setStates('launchRocket', event?.target?.value)
+                setStates(event?.target?.value, 'rocket', 'rocket_name')
               }
             >
               {rockets?.length > 0 ? (
@@ -102,9 +109,7 @@ const Modal = ({
             <Textarea
               placeholder="Descrição do lançamento"
               value={states?.launchDescription}
-              onChange={event =>
-                setStates('launchDescription', event?.target?.value)
-              }
+              onChange={event => setStates(event?.target?.value, 'details')}
             />
           </FormControl>
         </ModalBody>

@@ -29,11 +29,11 @@ const NewLaunches = () => {
 
   const [launchStates, setLaunchStates] = useState({
     id: Math.random(),
-    launchName: '',
-    launchDate: new Date(),
-    launchSite: '',
-    launchRocket: '',
-    launchDescription: '',
+    mission_name: '',
+    launch_date_local: new Date(),
+    launch_site: { site_name_long: '' },
+    rocket: { rocket_name: '' },
+    details: '',
   });
 
   const [newLaunches, setNewLaunches] = useState(() => {
@@ -49,11 +49,11 @@ const NewLaunches = () => {
   useEffect(() => {
     setLaunchStates({
       id: Math.random(),
-      launchName: '',
-      launchDate: new Date(),
-      launchSite: '',
-      launchRocket: '',
-      launchDescription: '',
+      mission_name: '',
+      launch_date_local: new Date(),
+      launch_site: { site_name_long: '' },
+      rocket: { rocket_name: '' },
+      details: '',
     });
 
     return localStorage.setItem(
@@ -63,8 +63,15 @@ const NewLaunches = () => {
   }, [newLaunches]);
 
   const setStates = useCallback(
-    (state, value) => {
-      setLaunchStates({
+    (value, state, subState) => {
+      if (subState) {
+        return setLaunchStates({
+          ...launchStates,
+          [state]: { [subState]: value },
+        });
+      }
+
+      return setLaunchStates({
         ...launchStates,
         [state]: value,
       });
