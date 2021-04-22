@@ -46,6 +46,7 @@ const Modal = ({
       onClose={() => setIsModalVisible(!isModalVisible)}
       isCentered
       scrollBehavior="inside"
+      size="xl"
     >
       <ModalOverlay />
       <ModalContent>
