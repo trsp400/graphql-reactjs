@@ -30,7 +30,7 @@ const NewLaunches = () => {
   const [launchStates, setLaunchStates] = useState({
     id: Math.random(),
     launchName: '',
-    launchDate: '',
+    launchDate: new Date(),
     launchSite: '',
     launchRocket: '',
     launchDescription: '',
@@ -50,7 +50,7 @@ const NewLaunches = () => {
     setLaunchStates({
       id: Math.random(),
       launchName: '',
-      launchDate: '',
+      launchDate: new Date(),
       launchSite: '',
       launchRocket: '',
       launchDescription: '',
@@ -91,7 +91,7 @@ const NewLaunches = () => {
   );
 
   const launchInfo = gql`
-    query GetLaucnpads {
+    query GetLauchpads {
       launchpads {
         name
       }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Input,
   Select,
@@ -14,6 +15,8 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
+import DateTimePicker from 'react-datetime-picker';
+
 const Modal = ({
   launchData,
   states,
@@ -22,7 +25,12 @@ const Modal = ({
   setIsModalVisible,
   onSave,
 }) => {
+  const [date, setDate] = useState(new Date());
   const { launchpads, rockets } = launchData;
+
+  useEffect(() => {
+    setStates('launchDate', date);
+  }, [date]);
 
   return (
     <ChakraModal
@@ -46,11 +54,7 @@ const Modal = ({
           </FormControl>
           <FormControl isRequired paddingBottom="2">
             <FormLabel>Data</FormLabel>
-            <Input
-              placeholder="Formato: dd/mm/yyyy"
-              value={states?.launchDate}
-              onChange={event => setStates('launchDate', event?.target?.value)}
-            />
+            <DateTimePicker onChange={setDate} value={states?.launchDate} />
           </FormControl>
           <FormControl paddingBottom="2">
             <FormLabel>Local de lançamento</FormLabel>
