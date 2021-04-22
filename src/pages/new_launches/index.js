@@ -15,128 +15,12 @@ import {
   CloseButton,
   Select,
   Button,
-  Modal as ChakraModal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Textarea,
 } from '@chakra-ui/react';
 
 import NewLaunchesCard from '../../components/NewLaunchCard';
 import Spinner from '../../components/Spinner';
 
-const Modal = ({
-  launchData,
-  states,
-  setStates,
-  isModalVisible,
-  setIsModalVisible,
-  onSave,
-}) => {
-  const { launchpads, rockets } = launchData;
-
-  return (
-    <ChakraModal
-      isOpen={isModalVisible}
-      onClose={() => setIsModalVisible(!isModalVisible)}
-      isCentered
-      scrollBehavior="inside"
-      size="xl"
-    >
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Cadastrar novo lançamento</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <FormControl isRequired paddingBottom="2">
-            <Input
-              placeholder="Nome"
-              value={states?.launchName}
-              onChange={event => setStates('launchName', event?.target?.value)}
-            />
-          </FormControl>
-          <FormControl isRequired paddingBottom="2">
-            <FormLabel>Data</FormLabel>
-            <Input
-              placeholder="Formato: dd/mm/yyyy"
-              value={states?.launchDate}
-              onChange={event => setStates('launchDate', event?.target?.value)}
-            />
-          </FormControl>
-          <FormControl paddingBottom="2">
-            <FormLabel>Local de lançamento</FormLabel>
-            <Select
-              value={states?.launchSite}
-              placeholder="Selecione uma opção"
-              onChange={event => setStates('launchSite', event?.target?.value)}
-            >
-              {launchpads?.length > 0 ? (
-                launchpads?.map(site => (
-                  <option key={site?.name} value={site?.name}>
-                    {site?.name}
-                  </option>
-                ))
-              ) : (
-                <option value="No options">
-                  Não foram encontrados locais de lançamento
-                </option>
-              )}
-            </Select>
-          </FormControl>
-          <FormControl paddingBottom="2">
-            <FormLabel>Foguete</FormLabel>
-            <Select
-              placeholder="Selecione uma opção"
-              value={states?.launchRocket}
-              onChange={event =>
-                setStates('launchRocket', event?.target?.value)
-              }
-            >
-              {rockets?.length > 0 ? (
-                rockets?.map(rocket => (
-                  <option key={rocket?.name} value={rocket?.name}>
-                    {rocket?.name}
-                  </option>
-                ))
-              ) : (
-                <option value="No options">
-                  Não foram encontrados locais de lançamento
-                </option>
-              )}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <Textarea
-              placeholder="Descrição do lançamento"
-              value={states?.launchDescription}
-              onChange={event =>
-                setStates('launchDescription', event?.target?.value)
-              }
-            />
-          </FormControl>
-        </ModalBody>
-
-        <ModalFooter>
-          <Button
-            onClick={() => setIsModalVisible(!isModalVisible)}
-            variant="ghost"
-            mr={3}
-          >
-            Fechar
-          </Button>
-          <Button colorScheme="blue" onClick={onSave}>
-            Cadastrar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </ChakraModal>
-  );
-};
+import Modal from '../../components/Modal';
 
 const NewLaunches = () => {
   const [listLimit, setListLimit] = useState(10);
