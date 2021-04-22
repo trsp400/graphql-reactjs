@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import Home from '../pages/home';
 import Launches from '../pages/launches';
 import Rockets from '../pages/rockets';
 import NewLaunches from '../pages/new_launches';
@@ -19,6 +20,9 @@ const Routes = () => {
           </Route>
           <Route path="/new_launches" exact>
             <NewLaunches />
+          </Route>
+          <Route path="/" exact>
+            <Home />
           </Route>
         </Switch>
       </Layout>
